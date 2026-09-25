@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskEnterprise - Gestão Corporativa</title>
+    <!-- Link essencial para carregar o seu CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Configuração para PWA (App de Celular) -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0f172a">
+</head>
+<body>
+
+<!-- TELA DE LOGIN -->
+<div id="login-screen" class="auth-container">
+    <div class="auth-card">
+        <div class="auth-header">
+            <h2>Task<span>Enterprise</span></h2>
+            <p>Acesse sua central corporativa</p>
+        </div>
+        <form id="login-form">
+            <div class="form-group" style="margin-bottom: 1rem;">
+                <label for="login-email" style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem;">E-mail corporativo</label>
+                <input type="email" id="login-email" placeholder="seu@email.com" required style="width: 100%; padding: 0.65rem; border: 1px solid var(--border-color); border-radius: var(--radius);">
+            </div>
+            <div class="form-group" style="margin-bottom: 1.5rem;">
+                <label for="login-password" style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem;">Senha</label>
+                <input type="password" id="login-password" placeholder="Sua senha" required style="width: 100%; padding: 0.65rem; border: 1px solid var(--border-color); border-radius: var(--radius);">
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Entrar no Sistema</button>
+        </form>
+    </div>
+</div>
+
+<!-- APLICAÇÃO PRINCIPAL (Fica oculta até fazer o login) -->
+<div id="app-content" style="display: none;">
+    <header class="header">
+        <div class="header__top-bar">
+            <!-- Espaço do Perfil -->
+            <div class="user-profile">
+                <div class="user-avatar">
+                    <span>AJ</span>
+                </div>
+                <div class="user-info">
+                    <div class="name">Allarene Camara</div>
+                    <div class="role">Systems Analyst & Dev</div>
+                </div>
+            </div>
+            <!-- Botão de Sair / Logout -->
+            <button onclick="logout()" class="btn btn-sm btn-danger" style="background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid #ef4444; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer;">Sair</button>
+        </div>
+
+        <h1 class="header__title">Task<span>Enterprise</span></h1>
+        <p class="header__subtitle">Sistema de Gestão de Tarefas Corporativas</p>
+
+        <div class="flag-strip" title="Identidade Visual">
+            <div class="flag-red"></div>
+            <div class="flag-yellow"></div>
+            <div class="flag-green"></div>
+        </div>
+    </header>
+
+    <!-- Dashboard de Indicadores e Filtros -->
+    <section class="dashboard">
+        <div class="stats-card">
+            <span class="stat-number" id="total-tasks">0</span>
+            <span class="stat-label">Total</span>
+        </div>
+        <div class="stats-card pending">
+            <span class="stat-number" id="pending-tasks">0</span>
+            <span class="stat-label">Pendentes</span>
+        </div>
+        <div class="stats-card completed">
+            <span class="stat-number" id="completed-tasks">0</span>
+            <span class="stat-label">Concluídas</span>
+        </div>
+    </section>
+
+    <section class="filter-section">
+        <input type="text" id="search-input" placeholder="🔍 Buscar tarefa por título..." class="search-box">
+        <select id="sort-select" class="sort-box">
+            <option value="default">Ordenar por...</option>
+            <option value="az">Alfabética (A-Z)</option>
+            <option value="za">Alfabética (Z-A)</option>
+        </select>
+    </section>
+
+    <main class="main-container">
+        <section class="card form-card">
+            <h2>Nova Tarefa</h2>
+            <form id="task-form">
+                <div class="form-group">
+                    <label for="title">Título</label>
+                    <input type="text" id="title" placeholder="Ex: Refatorar microsserviço" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Descrição</label>
+                    <textarea id="description" placeholder="Detalhes da atividade..." rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Salvar Tarefa</button>
+            </form>
+        </section>
+
+        <section class="card list-card">
+            <h2>Tarefas Cadastradas</h2>
+            <div id="task-list" class="task-grid"></div>
+        </section>
+    </main>
+</div>
+
+<script src="app.js"></script>
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js')
+                .then(() => console.log('Service Worker registrado com sucesso!'))
+                .catch((err) => console.log('Erro ao registrar Service Worker:', err));
+        });
+    }
+</script>
+</body>
+</html>
