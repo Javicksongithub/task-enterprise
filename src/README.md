@@ -2,27 +2,44 @@
 
 > Sistema corporativo de gestão de tarefas de alta performance, desenvolvido com arquitetura full-stack moderna, suporte a PWA (Progressive Web App) e identidade visual inspirada nas cores nacionais da Guiné-Bissau.
 
----
+
+
+
+# 🚀 TaskEnterprise
+
+TaskEnterprise é uma aplicação full-stack moderna de gerenciamento de tarefas, desenvolvida como um PWA (Progressive Web App) para facilitar o controle de demandas diárias com alta performance e confiabilidade.
 
 ## 🛠️ Tecnologias Utilizadas
 
-Este projeto foi construído unindo robustez no backend e agilidade no frontend:
-* **Backend:** Java 17+, Spring Boot 3.2.5, Spring Data JPA, REST APIs.
-* **Banco de Dados:** PostgreSQL (Persistência relacional).
-* **Frontend:** HTML5, CSS3 (Metodologia BEM, Variáveis CSS, Flexbox/Grid), JavaScript ES6+ (Async/Fetch API).
-* **Mobile/PWA:** Web App Manifest, Service Workers para cache e suporte offline.
-* **Autenticação:** Camada de sessão baseada em localStorage (Preparado para expansão com Spring Security).
+### **Back-end**
+* **Java 17**
+* **Spring Boot 3.2.5** (Spring Web, Spring Data JPA)
+* **Banco de Dados**: PostgreSQL (hospedado no **Supabase** via Transaction Pooler)
+* **Gerenciador de Dependências**: Maven
+
+### **Front-end**
+* **HTML5, CSS3, JavaScript (Vanilla)**
+* **Service Worker & Web App Manifest** (Suporte a instalação PWA)
 
 ---
 
-## 🎨 Identidade Visual e Conceito
-A aplicação carrega uma sutil homenagem à identidade visual da Guiné-Bissau através de faixas estilizadas com as cores nacionais (Vermelho, Amarelo e Verde) integradas ao design system corporativo, unindo identidade cultural e engenharia de software moderna.
+## 📂 Estrutura do Projeto
 
----
+A organização dos diretórios segue o padrão oficial do Spring Boot para garantir o empacotamento automático dos recursos estáticos:
 
-## ⚙️ Como Executar o Projeto Localmente
-
-### 1. Clonar o Repositório
-```bash
-git clone [https://github.com/javicksongithub/task-enterprise.git](https://github.com/SEU-USUARIO/task-enterprise.git)
-cd task-enterprise
+```text
+task-enterprise/
+├── src/
+│   ├── main/
+│   │   ├── java/com/enterprise/task_enterprise/  # Controladores, Services, Repositories, Models e DTOs
+│   │   └── resources/
+│   │       ├── application.properties           # Configurações de porta e conexão com o banco
+│   │       └── static/                          # Arquivos do Front-end servidos pelo Spring Boot
+│   │           ├── index.html
+│   │           ├── style.css
+│   │           ├── app.js
+│   │           ├── sw.js
+│   │           └── manifest.json
+│   └── test/                                    # Testes unitários e de integração
+├── pom.xml                                      # Configuração do Maven
+└── render.yaml                                  # Configuração de deploy para o Render

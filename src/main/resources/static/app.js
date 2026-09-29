@@ -1,5 +1,8 @@
 /* eslint-disable no-unused-vars */
-const API_URL = 'http://localhost:8081/api/tasks';
+/*const API_URL = 'http://localhost:8081/api/tasks';*/
+// Em vez de usar "http://localhost:8081/api/tasks"
+// Use apenas o caminho relativo a partir da raiz:
+const API_URL = '/api/tasks';
 
 let allTasks = [];
 
@@ -132,7 +135,7 @@ taskForm.addEventListener('submit', async (e) => {
     const description = document.getElementById('description').value;
 
     try {
-        const response = adoptiveFetch = await fetch(API_URL, {
+        const response = await fetch(API_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ title, description })
@@ -141,6 +144,8 @@ taskForm.addEventListener('submit', async (e) => {
         if (response.ok) {
             taskForm.reset();
             fetchTasks();
+        } else {
+            console.error('Erro ao salvar no servidor');
         }
     } catch (error) {
         console.error('Erro ao criar tarefa:', error);
